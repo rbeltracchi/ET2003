@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="entity.Module" table="modulo">
+        <id column="pk_id_modulo" name="id">
+            <generator class="identity"/>
+        </id>
+        <property column="nombre" name="name" type="string"/>
+        <property column="descripcion" name="description" type="string"/>
+        <set name="topics" table="tema" cascade="all" lazy="true" fetch="select">
+            <key>
+                <column name="fk_id_modulo"/>
+            </key>
+            <one-to-many class="entity.Topic"/>
+        </set>
+    </class>
+</hibernate-mapping>

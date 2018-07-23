@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="entity.User" table="usuario">
+    <id column="pk_id_usuario" name="id">
+      <generator class="identity"/>
+    </id>
+    <property column="nombre" name="name" type="string"/>
+    <property column="apellido" name="surname" type="string"/>
+    <property column="contraseña" name="password" type="string"/>
+    <property column="email" name="eMail" type="string"/>
+    <property column="telefono" name="telephoneNumber" type="string"/>
+    <property column="progreso" name="progress" type="int"/>
+    <property column="alumno_111mil" name="is111Student" type="boolean"/>
+    <set name="completedExercises" table="ej_realizado" cascade="all" lazy="true" fetch="select">
+        <key>
+            <column name="fk_id_usuario"/>
+        </key>
+        <many-to-many class="entity.Exercise" column="fk_id_ejercicio"/>
+    </set>
+  </class>
+</hibernate-mapping>

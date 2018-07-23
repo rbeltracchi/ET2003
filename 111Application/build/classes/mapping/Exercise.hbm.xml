@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="entity.Exercise" table="ejercicio">
+    <id column="pk_id_ejercicio" name="id">
+      <generator class="identity"/>
+    </id>
+    <property column="enunciado" name="task" type="string"/>
+    <property column="imagen" name="image" type="string"/>
+    <property column="solucion" name="correctAnswer" type="int"/>
+    <property column="puntaje" name="score" type="int"/>
+    <property column="opcion1" name="option1" type="string"/>
+    <property column="opcion2" name="option2" type="string"/>
+    <property column="opcion3" name="option3" type="string"/>
+    <many-to-one name="topicBelong" class="entity.Topic" fetch="select">
+        <column name="fk_id_tema" not-null="false"/>
+    </many-to-one>
+    <set name="userDo" table="ej_realizado" cascade="all" lazy="true" fetch="select">
+        <key>
+            <column name="fk_id_ejercicio"/>
+        </key>
+        <many-to-many class="entity.User" column="fk_id_usuario"/>
+    </set>
+  </class>
+</hibernate-mapping>
